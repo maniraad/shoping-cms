@@ -1,9 +1,17 @@
+import React from "react"
+import Header from "./Components/Header/Header"
+import SideBar from "./Components/SideBar/SideBar"
 
 function App() {
 
   return (
     <>
-    <h1 className="text-blue-500 text-3xl">Hello world</h1>
+      <SideBar />
+
+      <div className="flex-[4] fixed left-0 w-[85%]">
+        <Header />
+        {/* Router */}
+      </div>
     </>
   )
 }
