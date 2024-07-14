@@ -8,7 +8,7 @@ function App() {
     <>
       <SideBar />
 
-      <div className="flex-[4] fixed left-0 w-[85%]">
+      <div className="flex-[4] fixed left-0 w-full xl:w-[85%]">
         <Header />
         {/* Router */}
       </div>
