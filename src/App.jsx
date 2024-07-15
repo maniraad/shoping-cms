@@ -13,9 +13,11 @@ function App() {
     <>
       <SideBar />
 
-      <div className="flex-[4] fixed left-0 w-full xl:w-[85%]">
+      <div className=" lg:flex-[4] fixed left-0 pr-[74px] md:pr-[76px] xl:pr-0 w-full xl:w-[85%]">
         <Header />
+        <div className="mt-16 px-12">
         {router}
+        </div>
       </div>
     </>
   )
