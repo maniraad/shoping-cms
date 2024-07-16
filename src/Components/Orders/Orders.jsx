@@ -1,7 +1,10 @@
 import React from 'react'
+import ErrorBox from '../ErrorBox/ErrorBox'
 
 export default function Orders() {
   return (
-    <div>Orders</div>
+    <>
+    <ErrorBox msg={'سفارشی یافت نشد !'}/>
+    </>
   )
 }
