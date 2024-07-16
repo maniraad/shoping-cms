@@ -5,10 +5,7 @@ function withSideBarToggle(OriginalComponent) {
     const NewComponent = () => {
         const contextData = useContext(DatasContext)
 
-        const sidebarToggleBtn = () => {
-            contextData.setIsSideBarOpen((prevIsShow) => !prevIsShow);
-            console.log(contextData.isSideBarOpen);
-        };
+        const sidebarToggleBtn = () => contextData.setIsSideBarOpen((prevIsShow) => !prevIsShow);
 
         return <OriginalComponent isSideBarOpen={contextData.isSideBarOpen} sidebarToggleBtn={sidebarToggleBtn} />;
     };
