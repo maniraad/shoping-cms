@@ -16,9 +16,9 @@ export default function SideBar() {
     const sidBarTabToggle = (tabName) => contextData.setSidBarTab(tabName)
 
     return (
-        <div className={`fixed ${contextData.isSideBarOpen ? `xl:w-[15%] ` : `w-auto mt-20`} h-screen flex-1 bg-white border-l-2`}>
+        <div className={`fixed ${contextData.isSideBarOpen ? `xl:w-[15%] ` : `hidden xl:inline-block w-auto mt-20`} h-screen flex-1 bg-white border-l-2 transition-all`}>
 
-            {contextData.isSideBarOpen && <h1 className="hidden xl:block text-center h-20 text-zinc-900 text-xl py-6 font-Estedad700">پنل مدیریت</h1>}
+            {contextData.isSideBarOpen && <h1 className="hidden xl:block text-center h-20 text-zinc-900 text-xl py-6 font-Estedad700 transition-all">پنل مدیریت</h1>}
 
             <ul className="text-zinc-700 p-4 space-y-3.5 mt-20 xl:mt-0">
                 <Link onClick={() => sidBarTabToggle('home')} to="" className={`flex rounded-lg px-3 h-12 items-center cursor-pointer text-xl gap-2.5 ${contextData.sidBarTab === 'home' && `bg-[#4880FF] text-white`}`}>

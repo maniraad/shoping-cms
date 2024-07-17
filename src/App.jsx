@@ -19,9 +19,9 @@ function App() {
 
         <SideBar />
 
-        <div className={`lg:flex-[4] fixed left-0 pr-[74px] md:pr-[76px] xl:pr-0 w-full ${isSideBarOpen && `xl:w-[85%]`} `}>
+        <div className={`lg:flex-[4] fixed left-0 w-full ${isSideBarOpen && `xl:w-[85%] pr-[74px] md:pr-[76px] xl:pr-0`}  transition-all`}>
           <Header />
-          <div className={`mt-16 px-12 ${isSideBarOpen ? `mr-[74px] md:mr-[76px] xl:mr-0` : `mr-20`}`}>
+          <div className={`mt-16 px-12 ${isSideBarOpen ? `mr-[74px] md:mr-[76px] xl:mr-0` : `xl:mr-20`} transition-all`}>
             {router}
           </div>
         </div>
