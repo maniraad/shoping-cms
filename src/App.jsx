@@ -10,7 +10,7 @@ import { useRoutes } from "react-router-dom";
 function App() {
 
   const router = useRoutes(routes)
-  const [isSideBarOpen, setIsSideBarOpen] = useState(true)
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false)
   const [sidBarTab, setSidBarTab] = useState('home')
 
   return (
@@ -18,10 +18,11 @@ function App() {
       <DatasContext.Provider value={{ isSideBarOpen, setIsSideBarOpen, sidBarTab, setSidBarTab }}>
 
         <SideBar />
-
-        <div className={`lg:flex-[4] fixed left-0 w-full ${isSideBarOpen && `xl:w-[85%] pr-[74px] md:pr-[76px] xl:pr-0`}  transition-all`}>
+        <div className="fixed left-0 w-full z-50">
           <Header />
-          <div className={`mt-16 px-12 ${isSideBarOpen ? `mr-[74px] md:mr-[76px] xl:mr-0` : `xl:mr-20`} transition-all`}>
+        </div>
+        <div className={`lg:flex-[4] fixed left-0 w-full p-0 ${isSideBarOpen && `xl:w-[85%] p-0 lg:pr-[76px]`} mt-20 transition-all`}>
+          <div className={`mt-16 px-12 ${isSideBarOpen ? `xl:mr-0` : `xl:mr-20`} transition-all`}>
             {router}
           </div>
         </div>
