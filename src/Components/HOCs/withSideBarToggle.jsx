@@ -7,7 +7,7 @@ function withSideBarToggle(OriginalComponent) {
 
         const sidebarToggleBtn = () => contextData.setIsSideBarOpen((prevIsShow) => !prevIsShow);
 
-        return <OriginalComponent isSideBarOpen={contextData.isSideBarOpen} sidebarToggleBtn={sidebarToggleBtn} />;
+        return <OriginalComponent isSideBarOpen={contextData.isSideBarOpen} setIsSideBarOpen={contextData.setIsSideBarOpen} sidebarToggleBtn={sidebarToggleBtn} />;
     };
 
     return NewComponent;

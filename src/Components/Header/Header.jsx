@@ -1,10 +1,19 @@
-import React, { useState, useRef, useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Bars3Icon } from '@heroicons/react/24/solid'
 import { BellIcon } from '@heroicons/react/24/outline'
 
 import withSideBarToggle from '../HOCs/withSideBarToggle'
 
-function Header({ isSideBarOpen, sidebarToggleBtn }) {
+function Header({ setIsSideBarOpen, isSideBarOpen, sidebarToggleBtn }) {
+
+  useEffect(() => {
+    if (window.innerWidth > 1024) {
+      setIsSideBarOpen(true)
+    } else {
+      setIsSideBarOpen(false)
+    }
+  }, [])
+
   return (
     <div className='flex items-center justify-between h-20 w-full bg-white border-b z-50'>
       <div className="p-5 w-full">
