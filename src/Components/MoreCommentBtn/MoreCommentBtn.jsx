@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-export default function EditCommentBtn({ onClose, onSubmitRemove, onSubmitEdit, onSubmitAnswer, onSubmitAccept }) {
+export default function MoreCommentBtn({ onClose, onSubmitRemove, onSubmitEdit, onSubmitAnswer, onSubmitAccept }) {
 
     useEffect(() => {
         const checkKey = (event) => {
