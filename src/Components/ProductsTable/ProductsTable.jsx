@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import DeleteModal from '../DeleteModal/DeleteModal'
+import QuestionModal from '../QuestionModal/QuestionModal'
 import EditModal from "../EditModal/EditModal"
 import ErrorBox from '../ErrorBox/ErrorBox'
 import toast from 'react-hot-toast';
@@ -20,7 +20,7 @@ export default function ProductsTable({ allProducts, getAllProducts }) {
     const [productNewSale, setProductNewSale] = useState("");
     const [productNewColors, setProductNewColors] = useState("");
 
-    const DeleteModalCancelAction = () => setIsShowDeleteModal(false)
+    const closeDeleteModal = () => setIsShowDeleteModal(false)
 
     const DeleteModalSubmitAction = () => {
         fetch(`http://localhost:3000/api/products/${productId}`, {
@@ -136,7 +136,7 @@ export default function ProductsTable({ allProducts, getAllProducts }) {
                     <ErrorBox msg={'محصولی یافت نشد !'} />
             }
 
-            {isShowModal && <DeleteModal DeleteModalCancelAction={DeleteModalCancelAction} DeleteModalSubmitAction={DeleteModalSubmitAction} />}
+            {isShowModal && <QuestionModal onClose={closeDeleteModal} SubmitAction={DeleteModalSubmitAction} child={"آیا از  حذف محصول اطمینان دارید؟"} />}
             {
                 isShowEditModal &&
                 <EditModal

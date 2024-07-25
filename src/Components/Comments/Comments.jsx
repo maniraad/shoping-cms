@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ErrorBox from '../ErrorBox/ErrorBox'
 import MoreCommentBtn from '../MoreCommentBtn/MoreCommentBtn';
 import ShowDetailModal from '../ShowDetailModal/ShowDetailModal';
-import DeleteModal from '../DeleteModal/DeleteModal';
+import QuestionModal from '../QuestionModal/QuestionModal';
 import EditModal from '../EditModal/EditModal';
 
 import toast from 'react-hot-toast';
@@ -11,9 +11,11 @@ export default function Comments() {
 
   const [allComments, setAllComments] = useState([]);
   const [commentId, setCommentId] = useState(null)
+  const [isAcceptComment, setIsAcceptComment] = useState(null)
   const [isShowMoreBtn, setIsShowMoreBtn] = useState(false);
   const [isShowDetailModal, setIsShowDetailModal] = useState(false);
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
+  const [isShowAcceptModal, setIsShowAcceptModal] = useState(false);
   const [isShowEditModal, setIsShowEditModal] = useState(false);
   const [mainCommentBody, setMainCommentBody] = useState(false);
 
@@ -33,7 +35,6 @@ export default function Comments() {
     })
       .then(res => res.json())
       .then(result => {
-        setIsShowMoreBtn(false);
         setIsShowDeleteModal(false);
         getAllComments()
         { toast.success("کامنت با موفقیت حذف شد.") }
@@ -55,13 +56,44 @@ export default function Comments() {
       res.json()
     })
       .then(result => {
-        setIsShowMoreBtn(false);
         setIsShowEditModal(false);
         getAllComments()
         { toast.success("کامنت با موفقیت ویرایش شد.") }
       })
       .catch(err => {
         console.log(err);
+        toast.error(` مشکلی رخ داده است. لطفا بعدا امتحان کنید. `)
+      })
+  }
+
+  const acceptComment = () => {
+    fetch(`http://localhost:3000/api/comments/accept/${commentId}`, {
+      method: 'POST',
+    })
+      .then(res => res.json())
+      .then(result => {
+        setIsShowAcceptModal(false);
+        getAllComments()
+        { toast.success("کامنت با موفقیت تایید شد.") }
+      })
+      .catch(err => {
+        setIsShowAcceptModal(false);
+        toast.error(` مشکلی رخ داده است. لطفا بعدا امتحان کنید. `)
+      })
+  }
+
+  const rejectComment = () => {
+    fetch(`http://localhost:3000/api/comments/reject/${commentId}`, {
+      method: 'POST',
+    })
+      .then(res => res.json())
+      .then(result => {
+        setIsShowAcceptModal(false);
+        getAllComments()
+        { toast.success("کامنت با موفقیت رد شد.") }
+      })
+      .catch(err => {
+        setIsShowAcceptModal(false);
         toast.error(` مشکلی رخ داده است. لطفا بعدا امتحان کنید. `)
       })
   }
@@ -102,6 +134,7 @@ export default function Comments() {
                         setIsShowMoreBtn(true)
                         setCommentId(comment.id)
                         setMainCommentBody(comment.body)
+                        setIsAcceptComment(Boolean(comment.isAccept))
                       }} className="min-w-[67px] px-3 py-2 mt-2 font-Estedad300 text-sm text-center text-white bg-[#4880FF] hover:bg-[#416dd3] rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300">بیشتر ...</button>
                     </td>
                   </tr>
@@ -123,10 +156,23 @@ export default function Comments() {
         (
           <MoreCommentBtn
             onClose={() => setIsShowMoreBtn(false)}
-            onSubmitRemove={() => setIsShowDeleteModal(true)}
-            onSubmitEdit={() => setIsShowEditModal(true)}
-            onSubmitAnswer={() => setIsShowDeleteModal(true)}
-            onSubmitAccept={() => setIsShowDeleteModal(true)}
+            onSubmitRemove={() => {
+              setIsShowMoreBtn(false)
+              setIsShowDeleteModal(true)
+            }}
+            onSubmitEdit={() => {
+              setIsShowMoreBtn(false)
+              setIsShowEditModal(true)
+            }}
+            onSubmitAnswer={() => {
+              setIsShowMoreBtn(false)
+              setIsShowDeleteModal(true)
+            }}
+            onSubmitAccept={() => {
+              setIsShowMoreBtn(false)
+              setIsShowAcceptModal(true)
+            }}
+            isAccept={isAcceptComment}
           />
         )
       }
@@ -145,7 +191,14 @@ export default function Comments() {
       {
         isShowDeleteModal &&
         (
-          <DeleteModal DeleteModalSubmitAction={DeleteModalSubmitAction} DeleteModalCancelAction={() => setIsShowDeleteModal(false)} />
+          <QuestionModal SubmitAction={DeleteModalSubmitAction} onClose={() => setIsShowDeleteModal(false)} child={"آیا از  حذف کامنت اطمینان دارید؟"} />
+        )
+      }
+
+      {
+        isShowAcceptModal &&
+        (
+          <QuestionModal SubmitAction={!isAcceptComment ? acceptComment : rejectComment} onClose={() => setIsShowAcceptModal(false)} child={`آیا از  ${!isAcceptComment ? `تایید` : `رد`} کردن کامنت اطمینان دارید؟`} />
         )
       }
 
