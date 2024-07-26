@@ -164,10 +164,6 @@ export default function Comments() {
               setIsShowMoreBtn(false)
               setIsShowEditModal(true)
             }}
-            onSubmitAnswer={() => {
-              setIsShowMoreBtn(false)
-              setIsShowDeleteModal(true)
-            }}
             onSubmitAccept={() => {
               setIsShowMoreBtn(false)
               setIsShowAcceptModal(true)
