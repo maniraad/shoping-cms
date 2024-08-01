@@ -51,10 +51,7 @@ export default function Comments() {
       body: JSON.stringify({
         body: mainCommentBody,
       }),
-    }).then(res => {
-      console.log(mainCommentBody);
-      res.json()
-    })
+    }).then(res => res.json())
       .then(result => {
         setIsShowEditModal(false);
         getAllComments()

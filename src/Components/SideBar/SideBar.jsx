@@ -6,7 +6,6 @@ import { HomeIcon } from '@heroicons/react/24/solid'
 import { EnvelopeIcon } from '@heroicons/react/24/solid'
 import { UsersIcon } from '@heroicons/react/24/solid'
 import { Squares2X2Icon } from '@heroicons/react/24/solid'
-import { ShoppingBagIcon } from '@heroicons/react/24/solid'
 import { TicketIcon } from '@heroicons/react/24/solid'
 
 export default function SideBar() {
@@ -34,10 +33,6 @@ export default function SideBar() {
                 <Link onClick={() => sidBarTabToggle('users')} to="users" className={`flex rounded-lg px-3 h-12 items-center cursor-pointer text-xl gap-2.5 ${contextData.sidBarTab === 'users' && `bg-[#4880FF] text-white`} transition-all`}>
                     <UsersIcon className='w-[18px] h-[18px] md:w-5 md:h-5 xl:w-6 xl:h-6' />
                     {contextData.isSideBarOpen && <span className='inline-block text-sm md:text-base xl:text-xl'>کاربران</span>}
-                </Link>
-                <Link onClick={() => sidBarTabToggle('orders')} to="orders" className={`flex rounded-lg px-3 h-12 items-center cursor-pointer text-xl gap-2.5 ${contextData.sidBarTab === 'orders' && `bg-[#4880FF] text-white`} transition-all`}>
-                    <ShoppingBagIcon className='w-[18px] h-[18px] md:w-5 md:h-5 xl:w-6 xl:h-6' />
-                    {contextData.isSideBarOpen && <span className='inline-block text-sm md:text-base xl:text-xl'>سفارشات</span>}
                 </Link>
                 <Link onClick={() => sidBarTabToggle('offs')} to="offs" className={`flex rounded-lg px-3 h-12 items-center cursor-pointer text-xl gap-2.5 ${contextData.sidBarTab === 'offs' && `bg-[#4880FF] text-white`} transition-all`}>
                     <TicketIcon className='w-[18px] h-[18px] md:w-5 md:h-5 xl:w-6 xl:h-6' />
